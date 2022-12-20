@@ -15,6 +15,6 @@ public class HardDrive extends Component {
 
     @Override
     public String toString() {
-        return "- Dysk twardy: " + super.toString() + ", pojemność: " + capacity +"GB";
+        return "- Dysk twardy: " + super.toString() + ", pojemność: " + capacity + "GB";
     }
 }
