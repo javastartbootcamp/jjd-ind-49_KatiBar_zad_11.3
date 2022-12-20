@@ -2,9 +2,8 @@ package pl.javastart.task;
 
 import java.util.InputMismatchException;
 
-public class Memory extends Processor {
+public class Memory extends OverclockableComponent {
     private int memory;
-    private static final int INCREASE_TEMPERATURE_BY_OVERCLOCK = 15;
 
     public Memory(String model, String producer, int id, int clock, double temperature, double maxSafeTemperature, int memory) {
         super(model, producer, id, clock, temperature, maxSafeTemperature);
@@ -16,15 +15,7 @@ public class Memory extends Processor {
 
     @Override
     public void overclock(int amount) {
-        int multiplyTemperature = amount / CLOCK_100_MHZ;
-        double newTemperature = getTemperature() + INCREASE_TEMPERATURE_BY_OVERCLOCK * multiplyTemperature;
-        if (newTemperature > getMaxSafeTemperature()) {
-            throw new OverdrawSafeTemperatureException("Próba przekroczenia maksymalnej temperatury pamięci: "
-                    + getMaxSafeTemperature() + "°C");
-        } else {
-            setClock(getClock() + amount);
-            setTemperature(newTemperature);
-        }
+        changeClockAndTemperature(amount, INCREASE_TEMPERATURE_BY_OVERCLOCK_MEMORY);
     }
 
     @Override
